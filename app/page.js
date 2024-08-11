@@ -60,6 +60,14 @@ export default function Home() {
     await reader.read().then(processText);
   };
 
+  // Handle key press event in the TextField
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevents the default action (e.g., form submission)
+      sendMessage(); // Call the sendMessage function when Enter is pressed
+    }
+  };
+
   return (
     <Box
       width="100vw"
@@ -107,6 +115,7 @@ export default function Home() {
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress} // Add the onKeyPress event here
           />
           <Button variant="contained" onClick={sendMessage}>Send</Button>
         </Stack>
