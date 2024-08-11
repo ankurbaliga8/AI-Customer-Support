@@ -1,6 +1,6 @@
 'use client'
 import { Box, Button, Stack, TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -11,6 +11,9 @@ export default function Home() {
   ]);
 
   const [message, setMessage] = useState('');
+
+  // Reference to the bottom of the messages
+  const messagesEndRef = useRef(null);
 
   // Helper function to send texts to backend and get responses
   const sendMessage = async () => {
@@ -60,6 +63,11 @@ export default function Home() {
     await reader.read().then(processText);
   };
 
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   // Handle key press event in the TextField
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -108,6 +116,7 @@ export default function Home() {
               </Box>
             </Box>
           ))}
+          <div ref={messagesEndRef} />
         </Stack>
         <Stack direction="row" spacing={2}>
           <TextField
