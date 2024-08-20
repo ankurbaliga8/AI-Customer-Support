@@ -4,8 +4,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ankur's AI chatbot",
-  description: "AI Customer support for Headstarter",
+  title: "DSA Helper AI by Ankur",
+  description: "DSA Helper for all your DSA needs",
 };
 
 export default function RootLayout({ children }) {
